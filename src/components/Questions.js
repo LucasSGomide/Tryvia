@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Loading from '../components/Loading';
 import {
   timerReset,
   timerStop,
@@ -169,36 +170,40 @@ class Questions extends Component {
           {shuffledQuestions.map((question) => {
             if (question === CORRECT_ANSWER) {
               return (
+                <div className="answer-container">
+                  <button
+                    type="button"
+                    data-testid="correct-answer"
+                    onClick={ (e) => this.handleAnswer(e, difficuty) }
+                    className="rquestion"
+                    key="correct"
+                    disabled={ disableBTN }
+                  >
+                    {question}
+                  </button>
+                </div>
+                );
+            }
+            const wrongButton = (
+              <div className="answer-container">
                 <button
                   type="button"
-                  data-testid="correct-answer"
-                  onClick={ (e) => this.handleAnswer(e, difficuty) }
-                  className="rquestion"
-                  key="correct"
-                  disabled={ disableBTN }
+                  data-testid={ `wrong-answers-${answerIndex += 1}` }
+                  className="wquestion"
+                  onClick={ this.handleAnswer }
+                  key={ `wrong${answerIndex}` }
+                  disabled={ disableBTN } 
                 >
                   {question}
                 </button>
-              );
-            }
-            const wrongButton = (
-              <button
-                type="button"
-                data-testid={ `wrong-answers-${answerIndex += 1}` }
-                className="wquestion"
-                onClick={ this.handleAnswer }
-                key={ `wrong${answerIndex}` }
-                disabled={ disableBTN }
-              >
-                {question}
-              </button>
+              </div>
             );
             return wrongButton;
           })}
         </div>
       );
     }
-    return <p>Loading</p>;
+    return <Loading />;
   }
 
   renderNext() {
@@ -206,6 +211,7 @@ class Questions extends Component {
       <button
         type="button"
         data-testid="btn-next"
+        className="btn-next"
         onClick={ this.changeToNextQuestion }
       >
         Next Question
@@ -217,6 +223,7 @@ class Questions extends Component {
     return (
       <Link to="/feedback">
         <button
+          className="btn-next"
           type="button"
           data-testid="btn-next"
           onClick={ this.changeToNextQuestion }
@@ -238,10 +245,14 @@ class Questions extends Component {
     this.handleTime();
 
     return (
-      <div>
-        {this.handleQuestions()}
-        {!hideNext && !feedback ? this.renderNext() : ''}
-        {!hideNext && feedback ? this.renderFeedback() : '' }
+      <div className="game-container">
+        <div className="questions-container">
+          {this.handleQuestions()}
+        </div>
+        <div className="next-container">
+          {!hideNext && !feedback ? this.renderNext() : ''}
+          {!hideNext && feedback ? this.renderFeedback() : '' }
+        </div>
       </div>
     );
   }

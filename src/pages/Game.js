@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchQuestionsAPI } from '../redux/actions';
 import GameHeader from '../components/GameHeader';
 import Timer from '../components/Timer';
+import Loading from '../components/Loading';
 
 class Game extends React.Component {
   constructor() {
@@ -22,12 +23,12 @@ class Game extends React.Component {
   handlePage() {
     const { loading } = this.props;
     if (loading) {
-      return <h2>Loading...</h2>;
+      return <Loading />;
     }
     return (
       <div>
-        <GameHeader />
         <Timer />
+        <GameHeader />
       </div>
     );
   }

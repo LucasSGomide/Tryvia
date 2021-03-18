@@ -29,15 +29,17 @@ class GameHeader extends React.Component {
 
     return (
       <div>
-        <img
-          data-testid="header-profile-picture"
-          // gravatar
-          src={ `https://www.gravatar.com/avatar/${md5(email)}` }
-          alt="gravatar-profile-pic"
-        />
-        <h3 data-testid="header-player-name">{name}</h3>
-        <p data-testid="header-score">{score}</p>
-        <Questions />
+        <div className="profile-container">
+          <img
+            data-testid="header-profile-picture"
+            // gravatar
+            src={ `https://www.gravatar.com/avatar/${md5(email)}` }
+            alt="gravatar-profile-pic"
+          />
+          <p data-testid="header-player-name">{name}</p>
+          <p data-testid="header-score">Score:{score}</p>
+        </div>
+          <Questions />
       </div>
     );
   }

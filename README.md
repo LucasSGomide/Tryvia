@@ -2,13 +2,13 @@
 
 ### Createad as a mandatory project from Trybe course.
 
-## Grupo:
+## Group:
 - Lucas Santiago Gomide
 - Lucas Veras
 - Rafael Gelatti
 - Vinícius Braga
 
-## Tecnologias: 
+## Techs: 
 - React
 - Redux
 - CSS
